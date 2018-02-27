@@ -26,6 +26,7 @@ namespace SerializationTesting
         /// <summary>
         /// The occupancy timer
         /// </summary>
+        [NonSerialized]
         private readonly System.Timers.Timer _occupancyTimer;
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace SerializationTesting
         /// <value>
         /// The state of the occupancy.
         /// </value>
-        [JsonIgnore]
+
         public State OccupancyState
         {
             get => _state;
@@ -133,7 +134,6 @@ namespace SerializationTesting
         /// <value>
         /// All children.
         /// </value>
-        [JsonIgnore]
         public IEnumerable<Location> AllChildren => Children.Union(Children.SelectMany(child => child.AllChildren));
 
         /// <summary>
@@ -142,7 +142,6 @@ namespace SerializationTesting
         /// <value>
         ///   <c>true</c> if this instance has occupied children; otherwise, <c>false</c>.
         /// </value>
-        [JsonIgnore]
         public bool HasOccupiedChildren => AllChildren.Any(child => child.OccupancyState == State.Occupied);
 
         /// <summary>
